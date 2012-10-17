@@ -1,2 +1,8 @@
 /app/etc/local.xml
 tmp
+.vagrant
+
+# Media dir
+media/**
+!media/.htaccess
+!media/downloadable/**
