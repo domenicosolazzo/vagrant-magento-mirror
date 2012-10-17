@@ -1,8 +1,16 @@
-/app/etc/local.xml
-tmp
-.vagrant
+#config files
+app/etc/local.xml
+errors/local.xml
 
-# Media dir
+#media dir
 media/**
 !media/.htaccess
 !media/downloadable/**
+
+#var dir
+var/**
+
+#librarian working dir
+tmp
+#running vagrant
+.vagrant
