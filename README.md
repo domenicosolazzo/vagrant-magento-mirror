@@ -1,80 +1,80 @@
-**Note:** There are modifications from a standard Magento release in this repo. 
-For a clean stock Magento mirror: https://github.com/LokeyCoding/magento-mirror
+**Note:** There are modifications from a standard Magento release in this repo.  
+For a clean stock Magento mirror: https://github.com/LokeyCoding/magento-mirror  
 
 
 Magneto Mirror (Vagrant development/testing environment)
 ========================================================
 
-Designed to be a fresh install of Magento, with the minium of variation from a standard package, for rapid depoloyment of a minimal environment for development and extension testing.
-This is in a working state for my purposes, but it should not be considered complete or bug free.
-This has only been tested with Mac OS X 10.8. It's not likely to work with Windows, yet.
+Designed to be a fresh install of Magento, with the minium of variation from a standard package, for rapid depoloyment of a minimal environment for development and extension testing.  
+This is in a working state for my purposes, but it should not be considered complete or bug free.  
+This has only been tested with Mac OS X 10.8. It's not likely to work with Windows, yet.  
 
 Features
 --------
 
 * Vagrant support.
 * Chef solo provisioner.
-* Impliments the [vagrent_magento cookbook](https://github.com/rjocoleman/vagrant_magento)
-* Sample data download and install _(optional)_.
-  + [Wiz](https://github.com/nvahalik/Wiz) installed by default (for use in `vagrant ssh`).
-  + Create's admin user.
-  + Aliased `/phpinfo.php` and `/magento-check.php` for _clean_ basic debugging.
+* Impliments the [vagrent_magento cookbook](https://github.com/rjocoleman/vagrant_magento)  
+* Sample data download and install _(optional)_.  
+  + [Wiz](https://github.com/nvahalik/Wiz) installed by default (for use in `vagrant ssh`).  
+  + Create's admin user.  
+  + Aliased `/phpinfo.php` and `/magento-check.php` for _clean_ basic debugging.  
 
 
 Requirements
 ------------
 
-* [Vagrant](http://vagrantup.com) 
-* Vagrant required [Oracle's VirtualBox](http://www.virtualbox.org/)
+* [Vagrant](http://vagrantup.com)  
+* Vagrant required [Oracle's VirtualBox](http://www.virtualbox.org/)  
 
 
 Variations from stock Magento
 -----------------------------
 
-* `README.md` added (this file).
-* `Vagrantfile`, `Cheffile` and `Cheffile.lock` in root directory.
-* `/deploy_support` and `/.librarian` folders.
-* `.gitignore` has been tightend up to cope with sample data and generated content.
+* `README.md` added (this file).  
+* `Vagrantfile`, `Cheffile` and `Cheffile.lock` in root directory.  
+* `/deploy_support` and `/.librarian` folders.  
+* `.gitignore` has been tightend up to cope with sample data and generated content.  
 
 
 Installation
 ------------
 
-* [Install Vagrant](http://vagrantup.com/v1/docs/getting-started/index.html) and you're ready to go
+* [Install Vagrant](http://vagrantup.com/v1/docs/getting-started/index.html) and you're ready to go  
 
 
 Usage
 -----
 
 * Clone this repo.
-* `$ vagrant up` to start the virtual machine.
-* Navigate to http://127.0.0.1:1080/.
+* `$ vagrant up` to start the virtual machine.  
+* Navigate to http://127.0.0.1:1080/.  
 
-* `$ vagrant ssh` to connect to the virtual machine's console (useful for Wiz etc).
-* `$ vagrant destroy` to delete all traces of the virutal environment.
+* `$ vagrant ssh` to connect to the virtual machine's console (useful for Wiz etc).  
+* `$ vagrant destroy` to delete all traces of the virutal environment.  
 
-Further docs on Vagrant at [vagrantup.com](http://vagrantup.com/v1/docs/getting-started/teardown.html)
+Further docs on Vagrant at [vagrantup.com](http://vagrantup.com/v1/docs/getting-started/teardown.html)  
 
 
 Configuration
 -------------
 
-These are some of the settings available. Default values are noted
-These are from the [vagrant_magento cookbook](https://github.com/rjocoleman/vagrant_magento).
+These are some of the settings available. Default values are noted  
+These are from the [vagrant_magento cookbook](https://github.com/rjocoleman/vagrant_magento).  
 
-* `node['vagrant_magento']['phpinfo_enabled'] - Enable /phpinfo.php alias. Default is true.
-* `node['vagrant_magento']['mage_check_enabled'] - Enable /magento-check.php alias. Default is true.
+* `node['vagrant_magento']['phpinfo_enabled']` - Enable /phpinfo.php alias. Default is true.  
+* `node['vagrant_magento']['mage_check_enabled']` - Enable /magento-check.php alias. Default is true.  
 
-* `node['vagrant_magento']['sample_data']['install'] - Install Magento sample data. Default is true
+* `node['vagrant_magento']['sample_data']['install']` - Install Magento sample data. Default is true  
 
-* `node['vagrant_magento']['config']['generate'] - Generate /app/etc/local.xml file. Default is true.
-* `node['vagrant_magento']['config']['database'] - Database. Default is "vagrant_magento".
+* `node['vagrant_magento']['config']['generate']` - Generate /app/etc/local.xml file. Default is true.  
+* `node['vagrant_magento']['config']['database']` - Database. Default is "vagrant_magento".  
 
-* `node['vagrant_magento']['wiz']['enable'] - Install Wiz. Default is true.
-* `node['vagrant_magento']['wiz']['create_admin'] - Create an admin user. Default is true.
-* `node['vagrant_magento']['wiz']['admin_user'] - Admin username. Default is "mage-admin".
-* `node['vagrant_magento']['wiz']['admin_pass'] - Admin password. Default is "123123"
-* `node['vagrant_magento']['wiz']['admin_email'] - Admin email. Default is "test@example.com"
+* `node['vagrant_magento']['wiz']['enable']` - Install Wiz. Default is true.  
+* `node['vagrant_magento']['wiz']['create_admin']` - Create an admin user. Default is true.  
+* `node['vagrant_magento']['wiz']['admin_user']` - Admin username. Default is "mage-admin".  
+* `node['vagrant_magento']['wiz']['admin_pass']` - Admin password. Default is "123123"  
+* `node['vagrant_magento']['wiz']['admin_email']` - Admin email. Default is "test@example.com"  
 
 These can be placed inside your `Vagrantfile` in `chef.json` e.g.
 ```ruby
