@@ -7,7 +7,7 @@ Magneto Mirror (Vagrant development/testing environment)
 
 Designed to be a fresh install of Magento, with the minium of variation from a standard package, for rapid depoloyment of a minimal environment for development and extension testing.  
 This is in a working state for my purposes, but it should not be considered complete or bug free.  
-This has only been tested with Mac OS X 10.8. It's not likely to work with Windows, yet.  
+This has only been tested with Mac OS X 10.8. It's not likely to work with Windows Hosts, yet.  
 
 Features
 --------
@@ -40,7 +40,7 @@ Variations from stock Magento
 Installation
 ------------
 
-* [Install Vagrant](http://vagrantup.com/v1/docs/getting-started/index.html) and you're ready to go  
+* [Install Vagrant](http://vagrantup.com/v1/docs/getting-started/index.html) and you're ready to go.  
 
 
 Usage
@@ -49,6 +49,7 @@ Usage
 * Clone this repo.
 * `$ vagrant up` to start the virtual machine.  
 * Navigate to http://127.0.0.1:1080/.  
+* Ports `80` and `3306` are forwarded to `1080` and `13306` respectivly on your local machine (can be configured in your `Vagrantfile`).  
 
 * `$ vagrant ssh` to connect to the virtual machine's console (useful for Wiz etc).  
 * `$ vagrant destroy` to delete all traces of the virutal environment.  
