@@ -75,6 +75,7 @@ $xml->startElement('config');
           $xml->writeCData('0');
         $xml->endElement(); //use_rewrites
       $xml->endElement(); //seo
+    $xml->endElement(); //web
   $xml->endElement(); //default
 
   $xml->startElement('admin');
