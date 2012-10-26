@@ -34,9 +34,9 @@ SITE
 GIT
   remote: https://github.com/rjocoleman/vagrant_magento
   ref: master
-  sha: 4c42882f820bef45e68f49b8089c7bf12cce1dc0
+  sha: 3e1e4e93470bd946a730607298df2c575502a45b
   specs:
-    vagrant_magento (0.0.0)
+    vagrant_magento (0.1.0)
       apache2 (>= 0.0.0)
       apt (>= 0.0.0)
       database (>= 0.0.0)
