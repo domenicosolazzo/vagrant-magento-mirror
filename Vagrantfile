@@ -23,10 +23,14 @@ Vagrant::Config.run do |config|
   config.vm.provision :chef_solo do |chef|
     chef.roles_path = 'deploy_support/chef/roles'
     chef.cookbooks_path = 'deploy_support/chef/cookbooks'
-    chef.add_role 'vagrant-lamp'
-    chef.json = { 'vagrant_apache2' => {
-      'phpinfo_enabled' => true
-      } 
+    chef.add_role 'vagrant_magento'
+    chef.json = { 'vagrant_magento' => {
+      'phpinfo_enabled' => true,
+      'mage_check_enabled' => true,
+      'sample_data' => { 'install' => true },
+      'config' => { 'generate' => true },
+      'admin' => { 'create' => true }
+      }
     }
     # Chef Logging
     #chef.log_level = :debug

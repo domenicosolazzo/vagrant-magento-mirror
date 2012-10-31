@@ -7,7 +7,7 @@ Magneto Mirror (Vagrant development/testing environment)
 
 Designed to be a fresh install of Magento, with the minium of variation from a standard package, for rapid depoloyment of a minimal environment for development and extension testing.  
 This is in a working state for my purposes, but it should not be considered complete or bug free.  
-This has only been tested with Mac OS X 10.8. It's not likely to work with Windows Hosts, yet.  
+This has only been tested with Mac OS X 10.8 and Windows 7 x64.  
 
 Features
 --------
@@ -16,7 +16,6 @@ Features
 * Chef solo provisioner.
 * Impliments the [vagrent_magento cookbook](https://github.com/rjocoleman/vagrant_magento)  
 * Sample data download and install _(optional)_.  
-  + [Wiz](https://github.com/nvahalik/Wiz) installed by default (for use in `vagrant ssh`).  
   + Create's admin user.  
   + Aliased `/phpinfo.php` and `/magento-check.php` for _clean_ basic debugging.  
 
@@ -51,10 +50,18 @@ Usage
 * Navigate to http://127.0.0.1:1080/.  
 * Ports `80` and `3306` are forwarded to `1080` and `13306` respectivly on your local machine (can be configured in your `Vagrantfile`).  
 
-* `$ vagrant ssh` to connect to the virtual machine's console (useful for Wiz etc).  
+* `$ vagrant ssh` to connect to the virtual machine's console ([doesn't work on Windows](http://vagrantup.com/v1/docs/getting-started/ssh.html)).  
 * `$ vagrant destroy` to delete all traces of the virutal environment.  
 
 Further docs on Vagrant at [vagrantup.com](http://vagrantup.com/v1/docs/getting-started/teardown.html)  
+
+
+Known Issues:
+-------------
+
+* Currently only works when `['sample_data']['install']` is enabled!  
+
+* When you first access Magento's admin, with `['sample_data']['install']` enabled you'll be greeted by an error report about the database table `vagrant_magento.catcha_log` not being created. Refreshing the page should give you access as the offending table is actually created at some point. This is a Magento (or sample data) bug and out of scope for this project.  
 
 
 Configuration
@@ -63,30 +70,29 @@ Configuration
 These are some of the settings available. Default values are noted  
 These are from the [vagrant_magento cookbook](https://github.com/rjocoleman/vagrant_magento).  
 
-* `node['vagrant_magento']['phpinfo_enabled']` - Enable /phpinfo.php alias. Default is true.  
-* `node['vagrant_magento']['mage_check_enabled']` - Enable /magento-check.php alias. Default is true.  
+* `node['vagrant_magento']['phpinfo_enabled']` - Enable /phpinfo.php alias. Default is false.  
+* `node['vagrant_magento']['mage_check_enabled']` - Enable /magento-check.php alias. Default is false.  
 
-* `node['vagrant_magento']['sample_data']['install']` - Install Magento sample data. Default is true  
+* `node['vagrant_magento']['sample_data']['install']` - Install Magento sample data. Default is false  
 
 * `node['vagrant_magento']['config']['generate']` - Generate /app/etc/local.xml file. Default is true.  
 * `node['vagrant_magento']['config']['database']` - Database. Default is "vagrant_magento".  
 
-* `node['vagrant_magento']['wiz']['enable']` - Install Wiz. Default is true.  
-* `node['vagrant_magento']['wiz']['create_admin']` - Create an admin user. Default is true.  
-* `node['vagrant_magento']['wiz']['admin_user']` - Admin username. Default is "mage-admin".  
-* `node['vagrant_magento']['wiz']['admin_pass']` - Admin password. Default is "123123"  
-* `node['vagrant_magento']['wiz']['admin_email']` - Admin email. Default is "test@example.com"  
+* `node['vagrant_magento']['admin']['create']` - Create an admin user. Default is false.  
+* `node['vagrant_magento']['admin']['username']` - Admin username. Default is "mage-admin".  
+* `node['vagrant_magento']['admin']['password']` - Admin password. Default is "123123"  
+* `node['vagrant_magento']['admin']['email']` - Admin email. Default is "test@example.com"  
 
 These can be placed inside your `Vagrantfile` in `chef.json` e.g.
 ```ruby
-chef.json = { 'vagrant_apache2' => {
-  'phpinfo_enabled' => false,
-  'wiz' => {
-    'admin_user' => 'robert',
-    'admin_pass' => 'badpassword'
-    }
-  } 
-}
+chef.json = { 'vagrant_magento' => {
+  'phpinfo_enabled' => true,
+  'mage_check_enabled' => true,
+  'sample_data' => { 'install' => true },
+  'config' => { 'generate' => true },
+  'admin' => { 'create' => true, 'username' => 'robert', 'password' => 'badpass' }
+  }
+
 ```
 
 

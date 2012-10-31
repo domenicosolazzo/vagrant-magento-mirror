@@ -2,10 +2,10 @@ SITE
   remote: http://community.opscode.com/api/v1
   specs:
     apache2 (1.2.0)
-    apt (1.4.8)
+    apt (1.5.0)
     aws (0.100.2)
     build-essential (1.1.2)
-    database (1.3.4)
+    database (1.3.6)
       aws (>= 0.0.0)
       mysql (>= 1.3.0)
       postgresql (>= 1.0.0)
@@ -34,9 +34,9 @@ SITE
 GIT
   remote: https://github.com/rjocoleman/vagrant_magento
   ref: master
-  sha: 6dedb811c7821f3d2685af466682315473ec1801
+  sha: d215d5021366f36e19a227c02b56e563dfa1621f
   specs:
-    vagrant_magento (0.1.1)
+    vagrant_magento (0.1.2)
       apache2 (>= 0.0.0)
       apt (>= 0.0.0)
       database (>= 0.0.0)
