@@ -50,18 +50,17 @@ Contributing
 Todo
 ----
 
-* More robust admin creation.
-* Importing an existing database.
-* mod_rewrite support.
 * Cross platform compatibility RHEL/Centos/ZendServer guests.
-* Cope with different sample data versions.
-* Allow the prefixing sample data (and admin user).
-* Make things more generic and portable.
-* Testing, testing, testing and more testing.
-* Caching mechanisms.
-  + Dependancies.
-  + Mage config.
-  + Vagrant (chef) options.
+* BYO DB.
+* BYO local.xml
+* clear admin notifications?
+
+
+Known Issues
+------------
+
+* Magento localhost admin login cookie issue on some browsers. i.e. http://www.aschroder.com/2009/05/fixing-magento-login-problem-after-a-fresh-installation/
++ Potential solutions; use hostname with dots in it or override the core code that presents the issue.
 
 
 License and Author

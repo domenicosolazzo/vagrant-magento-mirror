@@ -4,5 +4,6 @@
 site 'http://community.opscode.com/api/v1'
 
 cookbook 'vagrant_magento',
-  :git => 'https://github.com/rjocoleman/vagrant_magento',
-  :ref => 'master'
+#  :git => 'https://github.com/rjocoleman/vagrant_magento',
+#  :ref => 'master'
+:path => '../cookbooks/vagrant_magento'

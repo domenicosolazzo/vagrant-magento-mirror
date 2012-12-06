@@ -20,8 +20,23 @@
 default['mysql']['bind_address']               = attribute?('cloud') ? cloud['local_ipv4'] : ipaddress
 default['mysql']['port']                       = 3306
 
-case node["platform"]
-when "centos", "redhat", "fedora", "suse", "scientific", "amazon"
+case node["platform_family"]
+when "debian"
+  default['mysql']['server']['packages']      = %w{mysql-server}
+  default['mysql']['service_name']            = "mysql"
+  default['mysql']['basedir']                 = "/usr"
+  default['mysql']['data_dir']                = "/var/lib/mysql"
+  default['mysql']['root_group']              = "root"
+  default['mysql']['mysqladmin_bin']          = "/usr/bin/mysqladmin"
+  default['mysql']['mysql_bin']               = "/usr/bin/mysql"
+
+  set['mysql']['conf_dir']                    = '/etc/mysql'
+  set['mysql']['confd_dir']                   = '/etc/mysql/conf.d'
+  set['mysql']['socket']                      = "/var/run/mysqld/mysqld.sock"
+  set['mysql']['pid_file']                    = "/var/run/mysqld/mysqld.pid"
+  set['mysql']['old_passwords']               = 0
+  set['mysql']['grants_path']                 = "/etc/mysql/grants.sql"
+when "rhel", "fedora", "suse"
   default['mysql']['server']['packages']      = %w{mysql-server}
   default['mysql']['service_name']            = "mysqld"
   default['mysql']['basedir']                 = "/usr"
@@ -61,7 +76,7 @@ when "windows"
   default['mysql']['url']                     = "http://www.mysql.com/get/Downloads/MySQL-5.5/#{mysql['package_file']}/from/http://mysql.mirrors.pair.com/"
 
   default['mysql']['service_name']            = "mysql"
-  default['mysql']['basedir']                 = "#{ENV['SYSTEMDRIVE']}\\Program Files (x86)\\MySQL\\#{mysql['packages'].first}"
+  default['mysql']['basedir']                 = "#{ENV['SYSTEMDRIVE']}\\Program Files (x86)\\MySQL\\#{mysql['server']['packages'].first}"
   default['mysql']['data_dir']                = "#{mysql['basedir']}\\Data"
   default['mysql']['bin_dir']                 = "#{mysql['basedir']}\\bin"
   default['mysql']['mysqladmin_bin']          = "#{mysql['bin_dir']}\\mysqladmin"
@@ -102,7 +117,7 @@ end
 
 default['mysql']['reload_action'] = "restart" # or "reload" or "none"
 
-default['mysql']['use_upstart'] = platform?("ubuntu") && node.platform_version.to_f >= 10.04
+default['mysql']['use_upstart'] = node.platform?("ubuntu") && node['platform_version'].to_f >= 10.04
 
 default['mysql']['auto-increment-increment']        = 1
 default['mysql']['auto-increment-offset']           = 1
@@ -137,7 +152,6 @@ default['mysql']['tunable']['log_bin_trust_function_creators'] = false
 
 default['mysql']['tunable']['innodb_buffer_pool_size']         = "128M"
 default['mysql']['tunable']['innodb_log_file_size']            = "5M"
-default['mysql']['tunable']['innodb_buffer_pool_size']         = "128M"
 default['mysql']['tunable']['innodb_additional_mem_pool_size'] = "8M"
 default['mysql']['tunable']['innodb_data_file_path']           = "ibdata1:10M:autoextend"
 default['mysql']['tunable']['innodb_flush_log_at_trx_commit']  = "1"

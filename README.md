@@ -17,7 +17,7 @@ Features
 * Impliments the [vagrent_magento cookbook](https://github.com/rjocoleman/vagrant_magento)  
 * Sample data download and install _(optional)_.  
   + Create's admin user.  
-  + Aliased `/phpinfo.php` and `/magento-check.php` for _clean_ basic debugging.  
+  + Aliased `/phpinfo.php` and `/magento-check.php` for _non-intrusive_ but basic debugging.  
 
 
 Requirements
@@ -59,8 +59,6 @@ Further docs on Vagrant at [vagrantup.com](http://vagrantup.com/v1/docs/getting-
 Known Issues:
 -------------
 
-* Currently only works when `['sample_data']['install']` is enabled!  
-
 * When you first access Magento's admin, with `['sample_data']['install']` enabled you'll be greeted by an error report about the database table `vagrant_magento.catcha_log` not being created. Refreshing the page should give you access as the offending table is actually created at some point. This is a Magento (or sample data) bug and out of scope for this project.  
 
 
@@ -75,13 +73,12 @@ These are from the [vagrant_magento cookbook](https://github.com/rjocoleman/vagr
 
 * `node['vagrant_magento']['sample_data']['install']` - Install Magento sample data. Default is false  
 
-* `node['vagrant_magento']['config']['generate']` - Generate /app/etc/local.xml file. Default is true.  
-* `node['vagrant_magento']['config']['database']` - Database. Default is "vagrant_magento".  
+* `node['vagrant_magento']['config']['install']` - Install Magento. Default is false.  
+* `node['vagrant_magento']['config']['db_name']` - Database. Default is "magento".  
 
-* `node['vagrant_magento']['admin']['create']` - Create an admin user. Default is false.  
-* `node['vagrant_magento']['admin']['username']` - Admin username. Default is "mage-admin".  
-* `node['vagrant_magento']['admin']['password']` - Admin password. Default is "123123"  
-* `node['vagrant_magento']['admin']['email']` - Admin email. Default is "test@example.com"  
+* `node['vagrant_magento']['admin']['admin_username']` - Admin username. Default is "mage-admin".  
+* `node['vagrant_magento']['admin']['admin_password']` - Admin password. Default is "abc1234"  
+* `node['vagrant_magento']['admin']['admin_email']` - Admin email. Default is "test@example.com"  
 
 These can be placed inside your `Vagrantfile` in `chef.json` e.g.
 ```ruby
@@ -89,8 +86,8 @@ chef.json = { 'vagrant_magento' => {
   'phpinfo_enabled' => true,
   'mage_check_enabled' => true,
   'sample_data' => { 'install' => true },
-  'config' => { 'generate' => true },
-  'admin' => { 'create' => true, 'username' => 'robert', 'password' => 'badpass' }
+  'config' => { 'install' => true },
+  'admin' => { 'admin_username' => 'robert', 'admin_password' => 'badpass1' }
   }
 
 ```
