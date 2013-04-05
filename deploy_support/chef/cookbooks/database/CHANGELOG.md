@@ -1,3 +1,21 @@
+## v1.3.12:
+
+* [COOK-850] - `postgresql_database_user` doesn't have example
+
+## v1.3.10:
+
+* [COOK-2117] - undefined variable `grant_statement` in mysql user
+  provider
+
+## v1.3.8:
+
+* [COOK-1896] - Escape command
+* [COOK-2047] - Chef::Provider::Database::MysqlUser action :grant
+  improperly quotes `username`@`host` string
+* [COOK-2060] - Mysql::Error: Table '*.*' doesn't exist when privileges
+  include SELECT and database/table attributes are nil
+* [COOK-2062] - Remove backticks from database name when using wildcard
+
 ## v1.3.6:
 
 * [COOK-1688] - fix typo in readme and add amazon linux to supported

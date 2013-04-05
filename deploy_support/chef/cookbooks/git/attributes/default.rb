@@ -22,6 +22,7 @@ when 'windows'
   default['git']['version'] = "1.8.0-preview20121022"
   default['git']['url'] = "http://github.com/downloads/msysgit/git/Git-#{node['git']['version']}.exe"
   default['git']['checksum'] = "8ec19d04912fd27d7350823c857a4807b550fa63a3744bf6fd2841de8cfa9a0f"
+  default['git']['display_name'] = "Git version #{ node['git']['version'] }"
 when "mac_os_x"
   default['git']['osx_dmg']['app_name']    = "git-1.8.0-intel-universal-snow-leopard"
   default['git']['osx_dmg']['volumes_dir'] = "Git 1.8.0 Snow Leopard Intel Universal"
@@ -34,3 +35,6 @@ else
   default['git']['url'] = "https://github.com/git/git/tarball/v#{node['git']['version']}"
   default['git']['checksum'] = "24f1895fa74a23b3d9233fa89a9ef04d83a1cd952d659720d6ea231bbd0c973c"
 end
+
+default['git']['server']['base_path'] = "/srv/git"
+default['git']['server']['export_all'] = "true"
